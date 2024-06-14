@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Blog</title>
+    <link rel="stylesheet" href="/css/jass.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+<div class="flex-column justify-space-around">
+        <header class="display-flex justify-space-between align-center p-2">
+
+            <div class="header-left">
+                <span id="menu-toggle">&#9776;</span>
+                <h1 style="color: #3e2723;">
+                    <a href="/" style="color:#3e2723;">Tech Blog</a>
+                </h1>
+            </div>
+                    <div class="header-right">
+    <nav id="menu" class="hidden">
+        <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        <ul>
+            <li class="menu-item">
+                <i class="fas fa-user menu-item-icon"></i> <!-- Font Awesome user icon -->
+                <a href="/profile">My Profile</a>
+            </li>
+            <li class="menu-item">
+                <i class="fas fa-edit menu-item-icon"></i> <!-- Font Awesome edit icon -->
+                <a href="/newpost">New Post</a>
+            </li>
+            <li class="menu-item">
+                <i class="fas fa-sign-out-alt menu-item-icon"></i> <!-- Font Awesome logout icon -->
+                <button id="logout" class="btn-no-style">Logout</button>
+                    </ul>
+                    {{else}}
+                    <a href="/login">login</a>
+                    {{/if}}
+                </nav>
+            </div>
+            
+        </header>
+        <main class="container container-fluid mt-5">
+            <!-- Render the sub layout -->
+            {{{ body }}}
+        </main>
+        <footer class="footer">
+    &copy; 2024 Tech Blog Made with ❤️ Daisy. | <a href="/contact">Contact</a>
+</footer>
+    </div>
+
+    <!-- Render script for logged in users only -->
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
+
+
+    <script>
+    function toggleMenu() {
+    var nav = document.getElementById("menu");
+    if (nav.style.display === "block") {
+        nav.style.display = "none";
+    } else {
+        nav.style.display = "block";
+    }
+}
+
+// Add event listener for menu toggle button click
+document.getElementById("menu-toggle").addEventListener("click", toggleMenu);
+
+// Add event listener for DOMContentLoaded event
+document.addEventListener("DOMContentLoaded", function() {
+    // Add event listener for menu toggle button click (inside DOMContentLoaded)
+    document.getElementById("menu-toggle").addEventListener("click", toggleMenu);
+});
+    </script>
+</body>
+
+</html>

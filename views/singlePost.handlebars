@@ -1,0 +1,58 @@
+<!-- singlepost.handlebars -->
+<div class="post">
+    <h2>{{ post.title }}-<span class="post-info">{{ post.User.username }} | {{ formatDate post.createdAt}}</span></h2>
+    <p>{{ post.content }}</p>
+    
+
+</div>
+    <!-- Edit and Delete Buttons -->
+
+    {{#if isAuthor}}
+    <div class="post-actions">
+        <a href="/posts/{{post.id}}/edit" 
+        class="btn edit-post-btn">Edit Post</a>
+    <button class="delete-post-btn" data-post-id="{{ post.id }}">Delete Post</button>
+    </div>
+    {{/if}}
+</div>
+
+
+
+{{> comments comments=comments postId=post.id logged_in=logged_in }}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Find the delete button
+    const deleteButton = document.querySelector('.delete-post-btn');
+
+    // Define the delete handler function
+    function deleteHandler(event) {
+        event.preventDefault();
+        const postId = event.target.dataset.postId;
+        fetch(`/api/posts/${postId}`, {
+            method: 'DELETE'
+        })
+        .then(function(response) {
+            if (response.ok) {
+                // Redirect to the home page
+                window.location.href = '/';
+            } else {
+                console.error('Failed to delete post:', response.statusText);
+            }
+        })
+        .catch(function(error) {
+            console.error('Error deleting post:', error);
+        });
+    }
+
+    // Add event listener to the delete button
+    if (deleteButton) {
+        deleteButton.addEventListener('click', deleteHandler);
+    }
+});
+</script>
+
+
+{{#if logged_in}}
+<script src="/js/post.js"></script>
+{{/if}}

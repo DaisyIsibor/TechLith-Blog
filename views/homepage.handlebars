@@ -1,0 +1,72 @@
+<!-- homepage.handlebars -->
+
+{{#each posts}}
+    <div class="post" id="post-{{id}}">
+    <!-- Make the post title a link to the post details page -->
+    <h2><a href="/post/{{id}}/comments">{{title}}</a> - <span class="post-info">{{user.username}} | {{formatDate createdAt}}</span></h2>
+    <p>{{content}}</p>
+    <!-- Link to add a comment directly on the homepage -->
+    <button class="add-comment-btn" data-post-id="{{id}}">Add Comment</button>
+    <!-- Form to add a new comment -->
+    <form class="add-comment-form" style="display: none;">
+        <input type="hidden" class="post-id" value="{{id}}">
+        <textarea class="comment-text" placeholder="Add your comment here"></textarea>
+        <button type="submit">Submit Comment</button>
+    </form>
+</div>
+{{/each}}
+
+<script>
+// Function to handle clicking the "Add Comment" button under a post
+document.querySelectorAll('.add-comment-btn').forEach(function(button) {
+    button.addEventListener('click', function() {
+        const postId = this.getAttribute('data-post-id');
+        const post = this.closest('.post');
+        const commentForm = post.querySelector('.add-comment-form');
+        const commentText = commentForm.querySelector('.comment-text');
+
+        // Set the post id in the hidden input field
+        commentForm.querySelector('.post-id').value = postId;
+
+        // Toggle the display of the comment form
+        if (commentForm.style.display === 'none') {
+            commentForm.style.display = 'block';
+        } else {
+            commentForm.style.display = 'none';
+        }
+
+        // Focus on the comment text area
+        commentText.focus();
+    });
+});
+
+// Handle form submission for adding a new comment
+document.querySelectorAll('.add-comment-form').forEach(function(form) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const postId = this.querySelector('.post-id').value;
+        const commentText = this.querySelector('.comment-text').value;
+        submitComment(postId, commentText);
+    });
+});
+</script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to scroll to the newly created post
+        function scrollToNewPost() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('postId');
+            if (postId) {
+                const postElement = document.getElementById('post-' + postId);
+                if (postElement) {
+                    postElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+
+        // Call the function to scroll to the newly created post
+        scrollToNewPost();
+    });
+</script>

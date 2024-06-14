@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styling for Sign Up Form */
+.signupform {
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+.form {
+    background-color: white;
+    width: 400px;
+    border-radius: 8px;
+    padding: 20px 40px;
+    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+}
+
+.title {
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+
+.inputContainer {
+    position: relative;
+    margin-bottom: 20px;
+    height: 45px;
+    width: 90%;
+}
+
+.input {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    border: 1px solid #DADCE0;
+    border-radius: 7px;
+    font-size: 16px;
+    padding: 0 20px;
+    outline: none;
+    background: none;
+    z-index: 1;
+}
+
+.label {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 0 4px;
+    background-color: white;
+    color: #DADCE0;
+    font-size: 16px;
+    transition: 0.5s;
+    z-index: 0;
+}
+
+.input:focus + .label,
+.input:not(:placeholder-shown) + .label {
+    top: -7px;
+    font-size: 12px;
+    font-weight: 600;
+    z-index: 10;
+    left: 3px;
+    color:#34495e;
+}
+
+::placeholder {
+    color: transparent;
+}
+
+.submitBtn {
+    display: block;
+    margin-left: auto;
+    padding: 15px 30px;
+    border: none;
+    background-color: #34495e;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
+}
+.submitBtn:hover {
+    background-color: darkseagreen;
+    transform: translateY(-2px);
+}
+
+#menu-toggle {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 20px; 
+    padding: 7px; 
+    margin-right: 10px; 
+
+}
+
+#menu {
+    display: none; 
+    position: absolute;
+    top: calc(100% + 10px); 
+    left: 0;
+    border: 1px solid black; 
+    padding: 10px;
+    width: 200px;
+    height: 800px;
+    margin-top: -20px;
+    overflow-y: auto; 
+    box-sizing: border-box;
+    background-color: seagreen;
+}
+
+
+.menu-item {
+    display:flex;
+    align-items: center;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    color: black;
+}
+
+.menu-item-icon {
+    font-size: 20px;
+    margin-right: 5px; 
+}
+.menu-item:hover{
+    background-color:darkseagreen;
+    }
+
+    .show {
+        display: block;
+    }
+
+    #menu ul {
+        margin: 0;
+        padding: 0;
+    }
+    
+    #menu li {
+        margin: 0;
+        padding: 0;
+        
+    }
+    
+    #menu a {
+        flex: 1; 
+        display: flex;
+        padding: 10px; 
+        text-decoration: none;
+        color:black;
+        align-items: center;
+    }
+
+    #menu a:hover {
+        background-color: darkseagreen; 
+    }
+    
+    #logout {
+        color: black;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 10px; 
+        margin-right: 20px;
+    }
+
+
+    
+    .footer{
+        position:static;
+        bottom:0;
+        left:0;
+        width:100%;
+        background-color: seagreen;
+        color: black;
+        padding:20px;
+        text-align: center;
+        z-index: 1000; 
+    }
+    header {
+        display: fixed;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        position: absolute; 
+        background-color: seagreen;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        
+        
+    }
+
+
+    #login{
+        color: pink;
+        border: 60px solid black;
+    }
+    
+    /* Style for the header left section (containing the website name) */
+    .header-left {
+        display: flex;
+        align-items: center;
+        
+    
+    }
+
+    .header-left{
+        color:#3e2723;
+    }
+    #login
+    .header-right  {
+        border: 4px solid black;
+    }
+    body{
+        background-color:blanchedalmond;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        overflow: auto;
+        height: 1000px;
+    }
+    
+    @media only screen and (max-width:768px) {
+        .footer{
+            position:static;
+            width:100%;
+        }
+    }
+    

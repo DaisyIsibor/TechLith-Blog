@@ -92,7 +92,7 @@ router.get('/post/:postId/comments', async (req, res) => {
 
 
 //Render edit post form
-router.get('/posts/edit/:id', withAuth, async (req, res) => {
+router.get('/posts/:id/edit', withAuth, async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id);
 
@@ -110,7 +110,7 @@ router.get('/posts/edit/:id', withAuth, async (req, res) => {
         }
 
         // Render the edit post form with the post data
-        res.render('editPost', {
+        res.render('editpost', {
             post,
             logged_in: req.session.logged_in
         });

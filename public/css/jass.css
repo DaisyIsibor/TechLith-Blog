@@ -189,11 +189,17 @@
     padding: 80px; 
 }
 
+#edit-post-form{
+    padding: 20px;
+    background-color: blanchedalmond;
+    margin-top:80px;
+
+}
 
 #write-form {
     padding: 20px; 
     background-color: blanchedalmond;
-    margin-top:50px; 
+    margin-top:40px; 
 
     
 }

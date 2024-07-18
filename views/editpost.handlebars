@@ -1,7 +1,7 @@
 <!-- Edit post form -->
 
 
-<form id="edit-post-form" action="'/posts/{{post.id}}" method="'POST">
+<form id="edit-post-form" action="/posts/{{post.id}}" method="'POST">
   <input type="hidden" name="_method"value="PUT">
   <input type="hidden" name="postId" value="{{ post.id }}">
 
@@ -16,4 +16,47 @@
 </form>
 
 
-  <script src="./js/post.js"></script>
+
+<script>
+    // Function to handle form submission for editing an existing post
+    function editPostFormHandler(event) {
+        event.preventDefault();
+
+        var postIdInput = document.querySelector('input[name="postId"]');
+        var titleInput = document.querySelector('#title');
+        var contentInput = document.querySelector('#content');
+
+        var postId = postIdInput.value;
+        var title = titleInput.value.trim();
+        var content = contentInput.value.trim();
+
+        if (title && content) {
+            fetch(`/api/posts/${postId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: title, content: content })
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    // Handle success (e.g., redirect or update UI)
+                    window.location.href = `/post/${postId}`;
+                } else {
+                    return response.json().then(function(data) {
+                        throw new Error(`Error: ${data.error}`);
+                    });
+                }
+            })
+            .catch(function(error) {
+                console.error('Error:', error);
+                alert('An error occurred while processing your request.');
+            });
+        }
+    }
+
+    // Attach event listener for edit post form
+    document.querySelector('#edit-post-form').addEventListener('submit', editPostFormHandler);
+</script>
+
+  {{!-- <script src="/js/post.js"></script> --}}

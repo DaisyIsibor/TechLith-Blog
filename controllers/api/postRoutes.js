@@ -54,7 +54,7 @@ router.get('/:postId', async (req, res) => {
 // Editing a post
 
 
-router.put('/api/posts/:id', withAuth, async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
     const postId = req.params.id;  // Corrected from req.params.postId
     const { title, content } = req.body;
 

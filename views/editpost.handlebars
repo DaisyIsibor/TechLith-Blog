@@ -1,7 +1,7 @@
 <!-- Edit post form -->
 
 
-<form id="edit-post-form" action="/posts/{{post.id}}" method="'POST">
+<form id="edit-post-form" action="/posts/{{post.id}}" method="POST">
   <input type="hidden" name="_method"value="PUT">
   <input type="hidden" name="postId" value="{{ post.id }}">
 
@@ -41,7 +41,7 @@
             .then(function(response) {
                 if (response.ok) {
                     // Handle success (e.g., redirect or update UI)
-                    window.location.href = `/post/${postId}`;
+                  window.location.href = `/post/${postId}/comments`;
                 } else {
                     return response.json().then(function(data) {
                         throw new Error(`Error: ${data.error}`);

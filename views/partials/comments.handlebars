@@ -16,7 +16,7 @@
 {{/if}}
 
 <!-- Form to add a new comment -->
-<form id="comment-form" class="add-comment-form" method="POST">
+<form id="comment-form" class="add-comment-form" method="POST" action="/api/comments">
     <input type="hidden" id="post-id" value="{{ postId }}">
     <textarea id="comment-text" name="comment_text" rows="3" cols="40" placeholder="Add your comment here"></textarea><br>
     <button type="submit">Submit Comment</button>

@@ -11,6 +11,7 @@ try {
     const comments = await Comment.findAll();
     res.status(200).json(comments);
 } catch (err) {
+    console.error('Error fetching comments:', err); // Added log
     res.status(500).json({ message: "Failed to fetch comments" });
 }
 });
@@ -27,24 +28,56 @@ try {
     }
     res.status(200).json(comments);
 } catch (err) {
+    console.error('Error fetching comments by post ID:', err); // Added log
     res.status(500).json({ message: "Failed to fetch comments" });
 }
 });
 
 // Create a new comment* postman
 
+// Fetches comments by post ID
+
 router.post('/', withAuth, async (req, res) => {
-    const body = req.body;
+    const { comment_text, postId } = req.body;
+    
     try {
+        if (!req.session.userId) {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+
         const newComment = await Comment.create({
-            ...body,
-            userId: req.session.userId,
+            comment_text,
+            postId,
+            userId: req.session.userId // Assuming userId is stored in session
         });
+        
         res.status(200).json({ newComment, success: true });
     } catch (err) {
-        res.status(500).json(err);
+        console.error('Error creating comment:', err);
+        res.status(500).json({ message: 'Failed to create comment', error: err });
     }
 });
+
+// router.post('/', withAuth, async (req, res) => {
+//     const body = req.body;
+
+//     console.log('Session Data:', req.session); // Log session data to check userId
+
+//     try {
+//     if (!req.session.userId) {
+//             return res.status(401).json({ message: 'User not authenticated' });
+//         }
+
+//         const newComment = await Comment.create({
+//             ...body,
+//             userId: req.session.userId,
+//         });
+//         res.status(200).json({ newComment, success: true });
+//     } catch (err) {
+//         console.error('Error creating comment:', err); // Added log
+//         res.status(500).json(err);
+//     }
+// });
 
 // Delete comment route//  * postman
 router.delete('/:id', withAuth, async (req, res) => {
@@ -68,6 +101,7 @@ router.delete('/:id', withAuth, async (req, res) => {
         // Comment successfully deleted
         res.status(200).json({ message: "Comment deleted successfully" });
     } catch (err) {
+        console.error('Error deleting comment:', err); // Added log
         // Handle errors
         res.status(500).json({ message: "Failed to delete comment", error: err });
     }

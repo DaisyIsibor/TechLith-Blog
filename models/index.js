@@ -15,7 +15,7 @@ User.hasMany(Comment, {
 
 //This is if a post has many post then a foreign key is created and can be deleted 
 Post.hasMany(Comment, {
-    foreignKey: 'post_id',
+    foreignKey: 'postId', 
     onDelete: 'CASCADE'
 });
 
@@ -28,7 +28,7 @@ Post.belongsTo(User, {
 
 //this is if a post belong to a story then a foreign key is created and it can be deleted.
 Comment.belongsTo(Post, {
-    foreignKey: 'post_id',
+    foreignKey: 'postId',
     onDelete: 'CASCADE'
 });
 

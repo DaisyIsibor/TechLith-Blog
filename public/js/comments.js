@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const commentText = document.getElementById('comment-text').value.trim();
             const postId = document.getElementById('post-id').value; // Retrieve postId from hidden input field
 
+            console.log('Comment Text:', commentText); // Added log
+            console.log('Post ID:', postId); // Added log
+
             if (commentText && postId) {
                 try {
                     const response = await fetch('/api/comments', {
@@ -15,10 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            commentText: commentText,
+                            comment_text: commentText,
                             postId: postId
                         })
                     });
+
+
+                    console.log('Response:', response); // Added log
+                    
 
                     if (response.ok) {
                         document.location.reload(); // Reload the page to display the new comment

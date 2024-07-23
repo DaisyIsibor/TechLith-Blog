@@ -33,11 +33,14 @@ router.get('/', async (req, res) => {
     }
 });
 
-// fetches post by id *
+// fetches a single post by id *
 router.get('/:postId', async (req, res) => {
     try {
         const post = await Post.findByPk(req.params.postId, {
-            include: [{ model: User, attributes: ['username'] }]
+            include: [
+                { model: User, attributes: ['username'] },
+                { model: Comment, include: [User]} // No alias needed
+            ]
         });
         if (!post) {
             res.status(404).json({ error: 'Post not found' });
@@ -49,7 +52,7 @@ router.get('/:postId', async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch post' });
     }
 });
-
+ 
 
 // Editing a post
 

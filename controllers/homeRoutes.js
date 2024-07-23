@@ -60,35 +60,36 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
 
 
 // rendering the single post page with comment 
-router.get('/post/:postId/comments', async (req, res) => {
-    const postId = req.params.postId;
-    try {
-        const postData = await Post.findByPk(postId, {
-            include: [
-                {
-                    model: Comment,
-                    include: [User] // Including User to get username
-                }
-            ]
-        });
 
-        if (!postData) {
-            res.status(404).json({ message: 'No post found with this id' });
-            return;
-        }
+// router.get('/post/:postId/comments', async (req, res) => {
+//     const postId = req.params.postId;
+//     try {
+//         const postData = await Post.findByPk(postId, {
+//             include: [
+//                 {
+//                     model: Comment,
+//                     include: [User] // Including User to get username
+//                 }
+//             ]
+//         });
 
-        const post = postData.get({ plain: true });
+//         if (!postData) {
+//             res.status(404).json({ message: 'No post found with this id' });
+//             return;
+//         }
 
-        res.render('singlepost', { 
-            post, 
-            comments: post.Comments, 
-            logged_in: req.session.logged_in 
-        });
-    } catch (error) {
-        console.error('Error fetching comments:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-});
+//         const post = postData.get({ plain: true });
+
+//         res.render('singlepost', { 
+//             post, 
+//             comments: post.Comments, 
+//             logged_in: req.session.logged_in 
+//         });
+//     } catch (error) {
+//         console.error('Error fetching comments:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// });
 
 
 //Render edit post form

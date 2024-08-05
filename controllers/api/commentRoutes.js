@@ -38,17 +38,18 @@ try {
 // Fetches comments by post ID
 
 router.post('/', withAuth, async (req, res) => {
+    console.log('Session User ID:', req.session.userId);
     const { comment_text, postId } = req.body;
     
     try {
-        if (!req.session.userId) {
+        if (!req.session.user_id) {
             return res.status(401).json({ message: 'User not authenticated' });
         }
 
         const newComment = await Comment.create({
             comment_text,
             postId,
-            userId: req.session.userId // Assuming userId is stored in session
+            user_id: req.session.user_id // corrected user_id to match model
         });
         
         res.status(200).json({ newComment, success: true });
@@ -58,26 +59,6 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-// router.post('/', withAuth, async (req, res) => {
-//     const body = req.body;
-
-//     console.log('Session Data:', req.session); // Log session data to check userId
-
-//     try {
-//     if (!req.session.userId) {
-//             return res.status(401).json({ message: 'User not authenticated' });
-//         }
-
-//         const newComment = await Comment.create({
-//             ...body,
-//             userId: req.session.userId,
-//         });
-//         res.status(200).json({ newComment, success: true });
-//     } catch (err) {
-//         console.error('Error creating comment:', err); // Added log
-//         res.status(500).json(err);
-//     }
-// });
 
 // Delete comment route//  * postman
 router.delete('/:id', withAuth, async (req, res) => {

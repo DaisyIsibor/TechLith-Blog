@@ -20,11 +20,16 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-// Retrieving all posts with associated comments
+ // Retrieving all posts with associated comments
 router.get('/', async (req, res) => {
     try {
         const posts = await Post.findAll({
-            include: [{ model: Comment }],
+            include: [
+                {
+                    model: Comment,
+                    include: [User] // Include the User model to get usernames
+                }
+            ]
         });
         res.status(200).json(posts);
     } catch (err) {

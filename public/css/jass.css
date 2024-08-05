@@ -244,6 +244,52 @@
     background-color:darkseagreen;
 }
 
+.comments {
+    padding-top: 7px;
+    margin-top: 30px;
+}
+
+.comment {
+    padding: 10px;
+    padding-bottom: 20px; 
+    margin-bottom: 20px;
+    overflow-y: auto;
+    margin-top:10px;
+    color:white; /* color of the title */
+    border: 2px seagreen;
+    background-color: seagreen;
+
+
+}
+
+.comment p {
+    margin: 5px 0;
+}
+
+.comments h3{
+    margin-bottom: 5px;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: italic;
+    font-style:italic;
+}
+
+
+.comment p strong {
+    display: inline-block;
+    width: 150px;
+    margin-bottom: 10px;
+}
+
+.add-comment-form {
+    margin-top: 20px;
+}
+
+.add-comment-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
 
 /* Styling for the comments section */
 .comments-section {
@@ -263,6 +309,11 @@
     margin-top: 20%; 
     max-width: 50%; 
     border: 1px solid darkseagreen;
+}
+.add-comment-form textarea::placeholder {
+    color: #999; /* Placeholder text color */
+    font-style: italic; /* Italic style for the placeholder text */
+    font-size: 16px; /* Font size for the placeholder text */
 }
 
 /* Hide the post-id input field */

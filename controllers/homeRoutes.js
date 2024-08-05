@@ -59,7 +59,56 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
 });
 
 
-// rendering the single post page with comment 
+// Retrieving all posts with associated comments
+router.get('/', async (req, res) => {
+    try {
+        const posts = await Post.findAll({
+            include: [{ model: Comment }],
+        });
+        res.status(200).json(posts);
+    } catch (err) {
+        console.error('Error retrieving posts:', err);
+        res.status(500).json({ error: 'Failed to retrieve posts' });
+    }
+});
+
+// Render single post view with comments
+router.get('/post/:id/comments', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Comment,
+                    include: [User],
+                }
+            ],
+        });
+
+        if (!postData) {
+            res.status(404).json({ message: 'No post found with this id' });
+            return;
+        }
+
+        const post = postData.get({ plain: true });
+        const isAuthor = post.user_id === req.session.user_id;
+
+        res.render('singlepost', {
+            post,
+            comments: post.Comments,
+            isAuthor,
+            logged_in: req.session.logged_in,
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json(err);
+    }
+});
+
+// rendering the single post page with comment *
 
 // router.get('/post/:postId/comments', async (req, res) => {
 //     const postId = req.params.postId;
@@ -80,9 +129,13 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
 
 //         const post = postData.get({ plain: true });
 
+//         // * added new line 
+//         const isAuthor = post.user_id === req.session.user_id;
+
 //         res.render('singlepost', { 
 //             post, 
 //             comments: post.Comments, 
+//             isAuthor,
 //             logged_in: req.session.logged_in 
 //         });
 //     } catch (error) {

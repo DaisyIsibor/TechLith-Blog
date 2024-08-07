@@ -387,3 +387,20 @@ button[type="submit"] {
 .edit-post-btn:hover {
     background-color: royalblue;
 }
+
+.comment-actions {
+    margin-top: 10px;
+    text-align: right;
+}
+
+.comment-actions .delete-comment-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.comment-actions .delete-comment-btn:hover {
+    background-color: #ff1a1a;
+}

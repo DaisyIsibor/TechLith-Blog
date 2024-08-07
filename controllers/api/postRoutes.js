@@ -29,6 +29,7 @@ router.get('/', async (req, res) => {
                     model: Comment,
                     include: [User] // Include the User model to get usernames
                 }
+                
             ]
         });
         res.status(200).json(posts);
@@ -38,20 +39,34 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+
 // fetches a single post by id *
 router.get('/:postId', async (req, res) => {
     try {
         const post = await Post.findByPk(req.params.postId, {
             include: [
                 { model: User, attributes: ['username'] },
-                { model: Comment, include: [User]} // No alias needed
+                { model: Comment, include: [User]}
             ]
         });
         if (!post) {
             res.status(404).json({ error: 'Post not found' });
             return;
         }
-        res.json(post);
+
+        // Convert to plain object
+        const postData = post.get({ plain: true });
+
+        // Check if the logged-in user is the author of each comment
+        if (req.session.user_id) {
+            postData.comments.forEach(comment => {
+                comment.isAuthor = comment.user_id === req.session.user_id;
+            });
+        }
+
+        res.json(postData);
+    
     } catch (error) {
         console.error('Error fetching post:', error);
         res.status(500).json({ error: 'Failed to fetch post' });
@@ -91,28 +106,6 @@ router.put('/:id', withAuth, async (req, res) => {
         res.status(500).json({ error: 'Failed to update post' });
     }
 });
-
-// router.put('/posts/:id', withAuth, async (req, res) => {
-//     try {
-//         const postData = await Post.update(req.body, {
-//             where: {
-//                 id: req.params.id,
-//                 user_id: req.session.user_id // Ensure only the owner can update
-//             }
-//         });
-
-//         if (!postData[0]) {
-//             res.status(404).json({ message: 'No post found with this id or you do not have permission to edit this post' });
-//             return;
-//         }
-
-//         res.status(200).json({ message: 'Post updated successfully' });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json({ message: 'Failed to update post' });
-//     }
-// });
-
 
 
 

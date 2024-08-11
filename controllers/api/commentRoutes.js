@@ -59,73 +59,89 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+// Delete a comment
 
 router.delete('/:id', withAuth, async (req, res) => {
     try {
-        // Extract the comment ID from the request parameters
-        const commentId = req.params.id;
+        const comment = await Comment.destroy({
+            where: {
+                id: req.params.id,
+                user_id: req.session.user_id, // Ensure only the comment owner can delete
+            },
+        });
 
-        // Find the comment by ID
-        const comment = await Comment.findByPk(commentId);
-
-        // Check if the comment exists
-        if (!comment) {
-            return res.status(404).json({
-                message: `No comment found with id = ${commentId}`
-            });
+        if (!comment) {  // No comment found or not authorized
+            return res.status(404).json({ message: 'No comment found or you do not have permission to delete this comment' });
         }
 
-        // Log the comment and the session user ID for debugging
-        console.log('Comment:', comment);
-        console.log('Session User ID:', req.session.user_id);
-
-        // Check if the logged-in user is the author of the comment
-        if (comment.user_id !== req.session.user_id) {
-            return res.status(403).json({
-                message: 'You do not have permission to delete this comment'
-            });
-        }
-
-        // Delete the comment
-        await comment.destroy();
-
-        // Comment successfully deleted
         res.status(200).json({ message: 'Comment deleted successfully' });
     } catch (err) {
-        console.error('Error deleting comment:', err); // Added log
-        // Handle errors
+        console.error('Error deleting comment:', err);
         res.status(500).json({ message: 'Failed to delete comment', error: err });
     }
 });
 
-module.exports = router;
 
-// Delete comment route//  * postman
+
+// router.delete('/:id', withAuth, async (req, res) => {
+//     try {
+//         const commentId = req.params.id;
+//         const comment = await Comment.findByPk(commentId);
+
+//         if (!comment) {
+//             return res.status(404).json({ message: `No comment found with id = ${commentId}` });
+//         }
+
+//         if (comment.user_id !== req.session.user_id) {
+//             return res.status(403).json({ message: 'You do not have permission to delete this comment' });
+//         }
+
+//         await comment.destroy();
+//         res.status(200).json({ message: 'Comment deleted successfully' });
+//     } catch (err) {
+//         console.error('Error deleting comment:', err);
+//         res.status(500).json({ message: 'Failed to delete comment', error: err });
+//     }
+// });
+
+
 // router.delete('/:id', withAuth, async (req, res) => {
 //     try {
 //         // Extract the comment ID from the request parameters
 //         const commentId = req.params.id;
 
-//         // Find the comment by ID and delete it
-//         const deletedCommentCount = await Comment.destroy({
-//             where: { id: commentId }
-//         });
+//         // Find the comment by ID
+//         const comment = await Comment.findByPk(commentId);
 
-//         // Check if any comment was deleted
-//         if (deletedCommentCount === 0) {
-//             // No comment found with the specified ID
+//         // Check if the comment exists
+//         if (!comment) {
 //             return res.status(404).json({
 //                 message: `No comment found with id = ${commentId}`
 //             });
 //         }
 
+//         // Log the comment and the session user ID for debugging
+//         console.log('Comment:', comment);
+//         console.log('Session User ID:', req.session.user_id);
+
+//         // Check if the logged-in user is the author of the comment
+//         if (comment.user_id !== req.session.user_id) {
+//             return res.status(403).json({
+//                 message: 'You do not have permission to delete this comment'
+//             });
+//         }
+
+//         // Delete the comment
+//         await comment.destroy();
+
 //         // Comment successfully deleted
-//         res.status(200).json({ message: "Comment deleted successfully" });
+//         res.status(200).json({ message: 'Comment deleted successfully' });
 //     } catch (err) {
 //         console.error('Error deleting comment:', err); // Added log
 //         // Handle errors
-//         res.status(500).json({ message: "Failed to delete comment", error: err });
+//         res.status(500).json({ message: 'Failed to delete comment', error: err });
 //     }
 // });
 
-// module.exports = router;
+module.exports = router;
+

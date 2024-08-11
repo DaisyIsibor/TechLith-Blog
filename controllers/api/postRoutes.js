@@ -65,14 +65,19 @@ router.get('/:postId', async (req, res) => {
             });
         }
 
-        res.json(postData);
+        console.log('Post Data:', postData); // Add this line to debug
+
+        // res.json(postData);
+
+        // Pass the post data to the singlepost.handlebars template
+        res.render('singlepost', { post: postData, logged_in: req.session.logged_in });
     
     } catch (error) {
         console.error('Error fetching post:', error);
         res.status(500).json({ error: 'Failed to fetch post' });
     }
 });
- 
+
 
 // Editing a post
 

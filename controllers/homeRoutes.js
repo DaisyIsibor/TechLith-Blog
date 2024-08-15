@@ -73,17 +73,18 @@ router.get('/', async (req, res) => {
 });
 
 // Render single post view with comments
+
+
 router.get('/post/:id/comments', withAuth, async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [
                 {
-                    model: User,
-                    attributes: ['username'],
+                    model: User, // Include User model
+                    attributes: ['username'], // Only include the username attribute
                 },
                 {
-                    model: Comment,
-                    include: [User],
+                    model: Comment, include: [User],
                 }
             ],
         });
@@ -93,13 +94,25 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
             return;
         }
 
+        // Convert to plain object for easier manipulation
         const post = postData.get({ plain: true });
-        const isAuthor = post.user_id === req.session.user_id;
 
+        // Debug logging
+        console.log('Post Data:', post);
+        console.log('Logged-in User ID:', req.session.user_id);
+
+        // Set `isAuthor` for post
+        post.isAuthor = post.user_id === req.session.user_id;
+
+        // Set `isAuthor` for each comment
+        post.comments.forEach(comment => {
+            comment.isAuthor = comment.user_id === req.session.user_id;
+            console.log('Comment Data:', comment);
+        });
+
+        // Pass `post` with `isAuthor` flags to the template
         res.render('singlepost', {
             post,
-            comments: post.Comments,
-            isAuthor,
             logged_in: req.session.logged_in,
         });
     } catch (err) {
@@ -107,6 +120,43 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
+
+
+
+// router.get('/post/:id/comments', withAuth, async (req, res) => {
+//     try {
+//         const postData = await Post.findByPk(req.params.id, {
+//             include: [
+//                 {
+//                     model: User,
+//                     attributes: ['username'],
+//                 },
+//                 {
+//                     model: Comment,
+//                     include: [User],
+//                 }
+//             ],
+//         });
+
+//         if (!postData) {
+//             res.status(404).json({ message: 'No post found with this id' });
+//             return;
+//         }
+
+//         const post = postData.get({ plain: true });
+//         const isAuthor = post.user_id === req.session.user_id;
+
+//         res.render('singlepost', {
+//             post,
+//             comments: post.Comments,
+//             isAuthor,
+//             logged_in: req.session.logged_in,
+//         });
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json(err);
+//     }
+// });
 
 // rendering the single post page with comment *
 

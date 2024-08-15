@@ -12,28 +12,40 @@
 </div>
 {{/if}}
 
+
 <!-- Comments Section -->
+ {{#if post.comments.length}}
+<div class="comments">
+    <h3>Comments</h3>
+{{#each post.comments}}
+    {{> comments}}
+{{/each}}
+</div>
+{{else}}
+<p>No comments yet.</p>
+{{/if}} 
+
+
+
+{{!-- 
 {{#if post.comments.length}}
 <div class="comments">
     <h3>Comments</h3>
     {{#each post.comments}}
     <div class="comment">
-        <p><strong>Commented by:</strong> {{ this.user.username }}</p>
-        <p><strong>Commented on:</strong> {{ formatDate this.createdAt }}</p>
-        <p>{{ this.comment_text }}</p>
+        <p><strong>Commented by:</strong> {{this.user.username}}</p>
+        <p><strong>Commented on:</strong>{{formatDate this.createdAt}}</p>
+        <p>{{this.comment_text}}</p>
 
-       {{#if this.isAuthor}}
-        <div class="comment-actions">
-            <button class="delete-comment-btn" data-comment-id="{{ this.id }}">Delete Comment</button>
-        </div>
+        {{#if this.isAuthor}}
+            <button class="delete-comment-btn" data-id="{{this.id}}">DELETE COMMENT</button>
         {{/if}}
     </div>
     {{/each}}
 </div>
 {{else}}
 <p>No comments yet.</p>
-{{/if}}
-
+{{/if}} --}}
 
 <!-- Form to add a new comment -->
 <form id="comment-form" class="add-comment-form" method="POST" action="/api/comments">
@@ -41,7 +53,8 @@
     <textarea id="comment-text" name="comment_text" rows="3" cols="40" placeholder="Leave a Comment"></textarea><br>
     <button type="submit">Submit Comment</button>
 </form>
-<p>Debug Post ID: {{ post.id }}</p>
+
+
 
 
 <script>
@@ -74,34 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
         deleteButton.addEventListener('click', deleteHandler);
     }
     
-
- // Delete comment buttons
-    function deleteCommentHandler(event) {
-        event.preventDefault();
-        const commentId = event.target.dataset.commentId;
-        fetch(`/api/comments/${commentId}`, {
-            method: 'DELETE'
-        })
-        .then(function(response) {
-            if (response.ok) {
-                // Reload the page to update the comments list
-                document.location.reload();
-            } else {
-                console.error('Failed to delete comment:', response.statusText);
-                alert('Failed to delete the comment. Please try again later.');
-            }
-        })
-        .catch(function(error) {
-            console.error('Error deleting comment:', error);
-            alert('An error occurred while processing your request.');
-        });
-    }
-
-    // Add event listeners to the comment delete buttons
-    const deleteCommentButtons = document.querySelectorAll('.delete-comment-btn');
-    deleteCommentButtons.forEach(function(button) {
-        button.addEventListener('click', deleteCommentHandler);
-    });
 });
 </script>
 

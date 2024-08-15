@@ -290,6 +290,14 @@
     margin-bottom: 10px;
 }
 
+.comment-content {
+    margin-bottom: 10px;
+}
+
+.comment-actions {
+    text-align: right;
+}
+
 
 /* Styling for the comments section */
 .comments-section {
@@ -398,22 +406,17 @@ button {
 
 /* Delete comment button styling */
 .delete-comment-btn {
-    background-color: #ff4d4d; /* Red background */
-    color: white; /* White text */
-    border: none; /* Remove border */
-    padding: 8px 12px; /* Add some padding */
-    border-radius: 4px; /* Rounded corners */
-    margin-top: 8px; /* Add some margin at the top */
-    transition: background-color 0.3s ease; /* Smooth transition for background color */
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
 }
-
 .delete-comment-btn:hover {
-    background-color: #e60000; /* Darker red on hover */
+    background-color: darkred;
 }
 
-.delete-comment-btn:active {
-    background-color: #cc0000; /* Even darker red when clicked */
-}
+
 
 /* Delete button container */
 .comment-actions {

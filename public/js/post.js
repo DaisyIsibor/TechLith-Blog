@@ -133,32 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Comment form not found.');
     }
 
-
-//  // Function to handle comment deletion
-//  const deleteCommentHandler = async (event) => {
-//     if (!event.target.classList.contains('delete-comment-btn')) {
-//         return;
-//     }
-
-//     const commentId = event.target.dataset.commentId;
-
-//     try {
-//         const response = await fetch(`/api/comments/${commentId}`, {
-//             method: 'DELETE'
-//         });
-
-//         if (response.ok) {
-//             document.location.reload(); // Reload the page to update the comments list
-//         } else {
-//             console.error('Failed to delete comment:', response.statusText);
-//             alert('Failed to delete the comment. Please try again later.');
-//         }
-//     } catch (error) {
-//         console.error('Error deleting comment:', error);
-//         alert('An error occurred while processing your request.');
-//     }
-// };
-
-// // Add event listener to all delete comment buttons
-// document.querySelector('.comments').addEventListener('click', deleteCommentHandler);
 });
+
+
+ 

@@ -42,12 +42,13 @@ router.get('/', async (req, res) => {
 
 
 // fetches a single post by id *
+
 router.get('/:postId', async (req, res) => {
     try {
         const post = await Post.findByPk(req.params.postId, {
             include: [
                 { model: User, attributes: ['username'] },
-                { model: Comment, include: [User]}
+                { model: Comment, include: [User] }
             ]
         });
         if (!post) {
@@ -58,25 +59,63 @@ router.get('/:postId', async (req, res) => {
         // Convert to plain object
         const postData = post.get({ plain: true });
 
-        // Check if the logged-in user is the author of each comment
+        // Check if the logged-in user is the author of the post
         if (req.session.user_id) {
+            postData.isAuthor = postData.user_id === req.session.user_id;
+
+            // Set isAuthor for comments
             postData.comments.forEach(comment => {
                 comment.isAuthor = comment.user_id === req.session.user_id;
             });
         }
 
-        console.log('Post Data:', postData); // Add this line to debug
-
-        // res.json(postData);
-
-        // Pass the post data to the singlepost.handlebars template
         res.render('singlepost', { post: postData, logged_in: req.session.logged_in });
-    
+
     } catch (error) {
         console.error('Error fetching post:', error);
         res.status(500).json({ error: 'Failed to fetch post' });
     }
 });
+
+// router.get('/:postId', async (req, res) => {
+//     try {
+//         const post = await Post.findByPk(req.params.postId, {
+//             include: [
+//                 { model: User, attributes: ['username'] },
+//                 { model: Comment, include: [User]}
+//             ]
+//         });
+//         if (!post) {
+//             res.status(404).json({ error: 'Post not found' });
+//             return;
+//         }
+
+//         // Convert to plain object
+//         const postData = post.get({ plain: true });
+
+//         // Check if the logged-in user is the author of each comment/  Set isAuthor for post
+//         if (req.session.user_id) {
+//             postData.isAuthor = postData.user_id === req.session.user_id;
+
+//              // Set isAuthor for comments
+//             postData.comments.forEach(comment => {
+//                 comment.isAuthor = comment.user_id === req.session.user_id;
+//             });
+//         }
+
+//         console.log('Post Data:', postData); // Add this line to debug
+
+//         // res.json(postData);
+
+//         // Pass the post data to the singlepost.handlebars template
+        
+//         res.render('singlepost', { post: postData, logged_in: req.session.logged_in });
+    
+//     } catch (error) {
+//         console.error('Error fetching post:', error);
+//         res.status(500).json({ error: 'Failed to fetch post' });
+//     }
+// });
 
 
 // Editing a post

@@ -1,30 +1,57 @@
-{{!-- <!-- views/comments.handlebars -->
-
-{{#if comments.length}}
-<div class="comments">
-    <h3>Comments</h3>
-    {{#each comments}}
-    <div class="comment">
-        <p>{{ this.comment_text }}</p>
-        <p>Commented by: {{ this.User.username }}</p>
-        <p>Commented on: {{ formatDate this.createdAt}}</p>
+<div class="comment">
+    <div class="comment-content">
+        <p><strong>Commented by:</strong> {{this.user.username}}</p>
+        <p><strong>Commented on:</strong> {{formatDate this.createdAt}}</p>
+        <p>{{this.comment_text}}</p>
     </div>
-    {{/each}}
+
+ {{#if this.isAuthor}}
+        <div class="comment-actions">
+            <button class="delete-comment-btn" data-id="{{this.id}}">DELETE</button>
+        </div>
+    {{else}}
+        <div class="comment-actions">
+            <p>No delete button available. (isAuthor: {{this.isAuthor}})</p>
+        </div>
+    {{/if}}
 </div>
-{{else}}
-    <p>No comments yet.</p>
-{{/if}}
-
-<!-- Form to add a new comment -->
-<form id="comment-form" class="add-comment-form" method="POST" action="/api/comments">
-    <input type="hidden" id="post-id" value="{{ postId }}">
-    <textarea id="comment-text" name="comment_text" rows="3" cols="40" placeholder="Add your comment here"></textarea><br>
-    <button type="submit">Submit Comment</button>
-</form>
 
 
+    {{!-- {{#if this.isAuthor}}
+        <div class="comment-actions">
+            <button class="delete-comment-btn" data-id="{{this.id}}">DELETE</button>
+        </div>
+    {{else}}
+        <div class="comment-actions">
+            <p>Delete button not shown for this comment.</p>
+        </div>
+    {{/if}}
+</div> --}}
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function delButtonHandler(event) {
+            if (event.target.classList.contains('delete-comment-btn')) {
+                var id = event.target.getAttribute('data-id');
+                fetch('/api/comments/' + id, {
+                    method: 'DELETE'
+                })
+                .then(function(response) {
+                    if (response.ok) {
+                        document.location.reload(); // Reload the page to reflect the changes
+                    } else {
+                        alert('Failed to delete the comment. Please try again.');
+                    }
+                })
+                .catch(function(error) {
+                    console.error('Error deleting comment:', error);
+                    alert('An error occurred while processing your request.');
+                });
+            }
+        }
 
-
-<script src="/js/post.js"></script> --}}
+        // Attach event listener to the document body to handle dynamically loaded comments
+        document.body.addEventListener('click', delButtonHandler);
+    });
+</script>

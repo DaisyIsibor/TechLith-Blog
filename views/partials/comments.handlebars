@@ -36,28 +36,36 @@
             if (event.target.classList.contains('delete-comment-btn')) {
 
                 const id = event.target.getAttribute('data-id');
-                
-                try{ const response = await
+           
+
+
                 fetch('/api/comments/' + id, {
                     method: 'DELETE'
                 });
 
             
+                .then(function(response){
 
                 if(!response.ok) {
-
-                    const data = await response.json();
+                    return response.json().then(function(data){
 
                     throw new Error(data.message || 'Failed to delete the comment. Please try again.');
-                
+                    });
                 }
-                event.target.closest('.comment').remove();
+                return response.json();
+                })
 
-                } catch(error) {
+                .then(function(){
+
+               
+                event.target.closest('.comment').remove();
+                })
+
+                .catch(function(error) {
                     console.error('Error deleting comment:', error);
 
                     alert(error.message || 'An error occurred while processing your request.');
-                }
+                });
             }
         }  
 

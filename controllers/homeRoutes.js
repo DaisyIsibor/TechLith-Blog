@@ -47,10 +47,21 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
         }
 
         const post = postData.get({ plain: true });
-        const isAuthor = post.user_id === req.session.user_id;
+
+        console.log('Post Data:', post);
+        console.log('Logged-in User ID:', req.session.user_id);
+
+
+        post.isAuthor = post.user_id === req.session.user_id;
+
+        post.comments.forEach(comment => {
+            comment.isAuthor = comment.user_id === req.session.user_id; 
+
+            console.log('Comment Data:',comment)
+        });
 
         res.render('singlepost', {
-            post, isAuthor, logged_in: req.session.logged_in
+            post, logged_in: req.session.logged_in
         });
     } catch (err) {
         console.error(err);

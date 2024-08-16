@@ -31,25 +31,32 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        function delButtonHandler(event) {
+        async function delButtonHandler(event) {
+
             if (event.target.classList.contains('delete-comment-btn')) {
-                var id = event.target.getAttribute('data-id');
+
+                const id = event.target.getAttribute('data-id');
+                
+                try{ const response = await
                 fetch('/api/comments/' + id, {
                     method: 'DELETE'
-                })
-                .then(function(response) {
-                    if (response.ok) {
-                        document.location.reload(); // Reload the page to reflect the changes
-                    } else {
-                        alert('Failed to delete the comment. Please try again.');
-                    }
-                })
-                .catch(function(error) {
-                    console.error('Error deleting comment:', error);
-                    alert('An error occurred while processing your request.');
                 });
+
+                const data = await response.json();
+
+                if(!response.ok) {
+                    throw new Error(data.message || 'Failed to delete the comment. Please try again.');
+                
+                }
+                event.target.closest('.comment').remove();
+
+                } catch(error) {
+                    console.error('Error deleting comment:', error);
+
+                    alert(error.message || 'An error occurred while processing your request.');
+                }
             }
-        }
+        }  
 
         // Attach event listener to the document body to handle dynamically loaded comments
         document.body.addEventListener('click', delButtonHandler);

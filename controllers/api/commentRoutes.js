@@ -63,22 +63,22 @@ router.post('/', withAuth, async (req, res) => {
 
 router.delete('/:id', withAuth, async (req, res) => {
     try {
-        const comment = await Comment.destroy({
+        const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
                 user_id: req.session.user_id, // Ensure only the comment owner can delete
             },
         });
 
-        if (!comment) {  // No comment found or not authorized
+        if (!commentData) {  // No comment found or not authorized
             res.status(404).json({ message: 'No comment found or you do not have permission to delete this comment' });
             return;
         }
 
-        res.status(200).json({ message: 'Comment deleted successfully' });
+        res.status(200).json({message:'Comment deleted successfully'});
     } catch (err) {
-        console.error('Error deleting comment:', err);
-        res.status(500).json({ message: 'Failed to delete comment', error: err });
+        console.error(err);
+        res.status(500).json({message:'Internal sever error'});
     }
 });
 

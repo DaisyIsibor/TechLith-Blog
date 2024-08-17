@@ -52,7 +52,7 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
         console.log('Logged-in User ID:', req.session.user_id);
 
 
-        post.isAuthor = post.user_id === req.session.user_id;
+        const isAuthor = post.user_id === req.session.user_id;
 
         post.comments.forEach(comment => {
             comment.isAuthor = comment.user_id === req.session.user_id; 
@@ -61,7 +61,10 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
         });
 
         res.render('singlepost', {
-            post, logged_in: req.session.logged_in
+            post,
+            comments: post.Comments,
+            isAuthor,
+             logged_in: req.session.logged_in
         });
     } catch (err) {
         console.error(err);
@@ -84,7 +87,7 @@ router.get('/', async (req, res) => {
 });
 
 // Render single post view with comments
-
+// ***
 
 router.get('/post/:id/comments', withAuth, async (req, res) => {
     try {
@@ -125,6 +128,7 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
         res.render('singlepost', {
             post,
             logged_in: req.session.logged_in,
+            isAuthor: post.isAuthor
         });
     } catch (err) {
         console.error(err);

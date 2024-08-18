@@ -7,22 +7,89 @@
     <p>{{content}}</p>
     <!-- Link to add a comment directly on the homepage -->
 
+      <!-- Like/Unlike Button -->
+    <button class="like-post-btn {{#if userLiked}}liked{{/if}}" data-post-id="{{id}}">
+            {{#if userLiked}}Unlike{{else}}Like{{/if}}
+        </button>
+        <!-- Like Count -->
+        <span class="like-count" id="like-count-{{id}}">Likes: {{likeCount}}</span>
+    </div>
 {{/each}}
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Function to scroll to the newly created post
         function scrollToNewPost() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const postId = urlParams.get('postId');
+            var urlParams = new URLSearchParams(window.location.search);
+            var postId = urlParams.get('postId');
             if (postId) {
-                const postElement = document.getElementById('post-' + postId);
+                var postElement = document.getElementById('post-' + postId);
                 if (postElement) {
                     postElement.scrollIntoView({ behavior: 'smooth' });
                 }
             }
         }
+
+        function updateLikeCount(postId) {
+            fetch('/like/count/' + postId)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(data) {
+                    document.getElementById('like-count-' + postId).innerText = 'Likes: ' + data.likeCount;
+                })
+                .catch(function(error) {
+                    console.error('Error fetching like count:', error);
+                });
+        }
+
+        function handleLikeUnlike(event) {
+            var button = event.target;
+            var postId = button.getAttribute('data-post-id');
+            var isLikeAction = button.textContent.trim() === 'Like';
+            var url = '/like/' + postId;
+            var method = isLikeAction ? 'POST' : 'DELETE';
+
+            fetch(url, { method: method })
+                .then(function(response) {
+                    if (!response.ok) {
+                        return response.text().then(function(text) {
+                            throw new Error(text || 'Failed to process your request.');
+                        });
+                    }
+
+                    // Toggle button text and class based on response
+                    if (isLikeAction) {
+                        button.textContent = 'Unlike';
+                        button.classList.remove('like-post-btn');
+                        button.classList.add('unlike-post-btn');
+                    } else {
+                        button.textContent = 'Like';
+                        button.classList.remove('unlike-post-btn');
+                        button.classList.add('like-post-btn');
+                    }
+
+                    // Update like count
+                    updateLikeCount(postId);
+                })
+                .catch(function(error) {
+                    console.error('Error handling like/unlike:', error);
+                    alert(error.message || 'An error occurred while processing your request.');
+                });
+        }
+
+        // Adding event listeners for like/unlike buttons
+        document.body.addEventListener('click', function(event) {
+            if (event.target.classList.contains('like-post-btn') || event.target.classList.contains('unlike-post-btn')) {
+                event.stopImmediatePropagation();
+                handleLikeUnlike(event);
+            }
+        });
+
+        // Initial load of like counts
+        document.querySelectorAll('.post').forEach(function(post) {
+            var postId = post.querySelector('.like-post-btn').getAttribute('data-post-id');
+            updateLikeCount(postId);
+        });
 
         // Call the function to scroll to the newly created post
         scrollToNewPost();

@@ -1,6 +1,7 @@
 const User = require('./user');
 const Post = require('./post');
 const Comment = require('./comment');
+const Like = require('./like');
 
 // this is if a user has many post then create foreign key and user post can be deleted 
 User.hasMany(Post, {
@@ -37,4 +38,16 @@ Comment.belongsTo(User, {
 });
 
 
-module.exports = { User, Post, Comment };
+Post.belongsTo(User, { 
+    foreignKey: 'user_id' });
+
+User.hasMany(Post, {
+     foreignKey: 'user_id' });
+
+Post.belongsToMany(User, {
+     through: Like, foreignKey: 'postId' });
+
+User.belongsToMany(Post, { 
+    through: Like, foreignKey: 'user_id' });
+
+module.exports = { User, Post, Comment, Like };

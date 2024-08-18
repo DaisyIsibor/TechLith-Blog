@@ -2,17 +2,27 @@
 
 {{#each posts}}
     <div class="post" id="post-{{id}}">
-    <!-- Make the post title a link to the post details page -->
-    <h2><a href="/post/{{id}}/comments">{{title}}</a> - <span class="post-info">{{user.username}} | {{formatDate createdAt}}</span></h2>
-    <p>{{content}}</p>
-    <!-- Link to add a comment directly on the homepage -->
+        <!-- Make the post title a link to the post details page -->
+        <h2>
+            <a href="/post/{{id}}/comments">{{title}}</a> - 
+            <span class="post-info">{{user.username}} | {{formatDate createdAt}}</span>
+        </h2>
+        <p>{{content}}</p>
 
-      <!-- Like/Unlike Button -->
-    <button class="like-post-btn {{#if userLiked}}liked{{/if}}" data-post-id="{{id}}">
-            {{#if userLiked}}Unlike{{else}}Like{{/if}}
+        <!-- Like/Unlike Button -->
+        <button class="like-post-btn {{#if userLiked}}liked{{/if}}" data-post-id="{{id}}">
+            <img src="./images/heart.svg" class="like-icon" alt="like icon">
+            <span class="like-count" id="like-count-{{id}}">{{likeCount}}</span>
         </button>
+
         <!-- Like Count -->
-        <span class="like-count" id="like-count-{{id}}">Likes: {{likeCount}}</span>
+        {{!-- <span class="like-count" id="like-count-{{id}}">Likes: {{likeCount}}</span> --}}
+    
+
+        <!-- Comment Link -->
+        <a href="/post/{{id}}/comments" class="comment-link">
+            <img src="./images/comment.svg" class="comment-icon" alt="comment logo">
+        </a>
     </div>
 {{/each}}
 

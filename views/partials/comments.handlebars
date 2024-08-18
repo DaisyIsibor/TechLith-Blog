@@ -10,9 +10,9 @@
             <button class="delete-comment-btn" data-id="{{this.id}}">DELETE</button>
         </div>
     {{else}}
-        <div class="comment-actions">
+        {{!-- <div class="comment-actions">
             <p>No delete button available. (isAuthor: {{this.isAuthor}})</p>
-        </div>
+        </div> --}}
     {{/if}}
 </div>
 
@@ -31,47 +31,38 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Define the delete button handler function
         async function delButtonHandler(event) {
-
             if (event.target.classList.contains('delete-comment-btn')) {
+                const id = event.target.getAttribute('data-id');
+                event.target.disabled = true;
 
-                const id = 
-        event.target.getAttribute('data-id');
+                try {
+                    const response = await fetch('/api/comments/' + id, {
+                        method: 'DELETE'
+                    });
 
-        event.target.disabled = true;
-        
-                try{
-                    const response=await
+                    if (!response.ok) {
+                        const data = await response.json();
+                        throw new Error(data.message || 'Failed to delete the comment. Please try again.');
+                    }
 
-                fetch('/api/comments/' + id, {
-                    method: 'DELETE'
-                });
+                    // Remove the comment from the DOM
+                    event.target.closest('.comment').remove();
 
-                
-
-                if(!response.ok) {
-                    const date=await response.json();
-              
-
-                    throw new Error(data.message || 'Failed to delete the comment. Please try again.');
-                }
-                    
-               
-
-               
-                event.target.closest('.comment').remove();
-                
-
-                }catch(error) {
+                } catch (error) {
                     console.error('Error deleting comment:', error);
-
                     alert(error.message || 'An error occurred while processing your request.');
-                
+                }
             }
-        }  
-        
-    }  
+        }
+
         // Attach event listener to the document body to handle dynamically loaded comments
-        document.body.addEventListener('click', delButtonHandler);
+        document.body.addEventListener('click', function(event) {
+            if (event.target.classList.contains('delete-comment-btn')) {
+                event.stopImmediatePropagation();
+                delButtonHandler(event); // Call the handler function and pass the event
+            }
+        });
     });
 </script>

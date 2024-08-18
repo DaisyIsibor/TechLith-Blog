@@ -88,7 +88,7 @@ router.delete('/:id', withAuth, async (req, res) => {
         return res.status(200).json({message:'Comment deleted successfully'});
     } catch (err) {
 
-        console.error('internal server error:', err);
+        console.error('Internal server error:',err);
 
         return res.status(500).json({message:'Internal sever error'});
     }

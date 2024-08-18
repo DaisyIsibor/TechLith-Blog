@@ -234,3 +234,77 @@
         }
     }
     
+    @media (max-width: 600px) {
+        .like-post-btn {
+            margin-right: 5px; /* Adjust margin for smaller screens */
+        }
+    
+        .like-icon {
+            width: 20px; /* Slightly smaller icons */
+            height: 20px;
+        }
+    }
+    
+    @media (max-width: 600px) {
+        .like-post-btn {
+            margin-right: 5px; /* Adjust margin for smaller screens */
+        }
+    
+        .like-icon {
+            width: 20px; 
+            height: 20px;
+        }
+    }
+        
+       /* Like/Unlike Button */
+    .like-post-btn {
+        margin-right: 10px; 
+        margin-top: 4px;
+    }
+    
+    /* Comment Icon */
+    .comment-icon {
+        width: 40px; 
+        height: 40px; 
+        margin-right: 10px; 
+        margin-top: 4px;
+        margin-left:10px;
+    }
+    
+    
+    .like-count {
+        font-weight: bold; 
+        color: #333; 
+        margin-top:1px;
+        margin-left: -5px;
+    
+        
+    }
+    
+    /* Like/Unlike Button */
+    .like-post-btn {
+        background: none; 
+        border: none; 
+        cursor: pointer; 
+        padding: 0; 
+        margin-right: 10px; 
+        align-items: center;
+        
+    }
+    
+    /* Like Icon */
+    .like-icon {
+        width: 50px; 
+        height: 35px; 
+        transition: filter 0.3s ease; /* Smooth transition for filter changes */
+        margin-top:5px;
+    }
+    
+    /* Change icon color when liked */
+    .like-post-btn.liked .like-icon {
+        filter: brightness(0) saturate(100%) invert(22%) sepia(91%) saturate(6793%) hue-rotate(355deg) brightness(109%) contrast(116%);
+    }
+    
+    .like-post-btn:hover .like-icon {
+        filter: brightness(20); /* Slight darkening on hover */
+    }

@@ -1,9 +1,29 @@
 <!-- profile.handlebars -->
 <section id="profile-info">
-    
-    <!-- Include profile information here -->
-    <p><h2>Welcome, {{ username }}</h2></p>
+    <h2>Welcome, {{username}}</h2>
 </section>
 
+<section id="user-posts">
+    <h3>My liked Posts</h3>
+    {{#if posts.length}}
+        <div id="posts-container">
+            {{#each posts}}
+                <div class="post" id="post-{{id}}">
+                    <h2>
+                        <a href="/post/{{id}}/comments">{{title}}</a> - 
+                        <span class="post-info">{{user.username}} | {{formatDate createdAt}}</span>
+                    </h2>
+                    <p>{{content}}</p>
 
-<script src="./js/profile.js"></script>
+                    <!-- Comment Link -->
+                    <a href="/post/{{id}}/comments" class="comment-link">
+                        <img src="./images/comment.svg" class="comment-icon" alt="comment logo">
+                    </a>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <p>You have no posts yet.</p>
+    {{/if}}
+</section>
+

@@ -308,3 +308,20 @@
     .like-post-btn:hover .like-icon {
         filter: brightness(20); /* Slight darkening on hover */
     }
+
+
+    #user-posts {
+        margin-top: 20px;
+    }
+    
+    
+    .comments-section {
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+    }
+    
+    .comment {
+        padding: 5px;
+        border-bottom: 1px solid #ddd;
+    }

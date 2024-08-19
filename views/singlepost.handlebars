@@ -1,6 +1,6 @@
 <!-- singlepost.handlebars -->
 <div class="post">
-    <h2>{{ post.title }}-<span class="post-info">{{ post.User.username }} | {{ formatDate post.createdAt }}</span></h2>
+    <h2>{{ post.title }}-<span class="post-info">{{ post.user.username }} | {{ formatDate post.createdAt }}</span></h2>
     <p>{{ post.content }}</p>
 </div>
 
@@ -25,27 +25,6 @@
 <p>No comments yet.</p>
 {{/if}} 
 
-
-
-{{!-- 
-{{#if post.comments.length}}
-<div class="comments">
-    <h3>Comments</h3>
-    {{#each post.comments}}
-    <div class="comment">
-        <p><strong>Commented by:</strong> {{this.user.username}}</p>
-        <p><strong>Commented on:</strong>{{formatDate this.createdAt}}</p>
-        <p>{{this.comment_text}}</p>
-
-        {{#if this.isAuthor}}
-            <button class="delete-comment-btn" data-id="{{this.id}}">DELETE COMMENT</button>
-        {{/if}}
-    </div>
-    {{/each}}
-</div>
-{{else}}
-<p>No comments yet.</p>
-{{/if}} --}}
 
 <!-- Form to add a new comment -->
 <form id="comment-form" class="add-comment-form" method="POST" action="/api/comments">

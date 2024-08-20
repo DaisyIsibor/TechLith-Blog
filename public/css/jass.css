@@ -98,7 +98,36 @@
 }
 /* stylink for each post and how it's displayed*/
 
+/* Apply Monograph font to the entire post */
 .post {
+    font-family: 'Monograph', sans-serif;
+    /* Other styles for the post */
+    color: #333; /* Ensure text is readable against the background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 100px;
+    margin-top: 100px;
+    
+}
+
+/* Style for post headings */
+.post h2 {
+    font-family: 'Monograph', sans-serif;
+    font-size: 30px;
+    color: #3e2723; /* Adjust color to complement the font */
+    margin-bottom: 10px;
+}
+
+/* Style for post paragraphs */
+.post p {
+    font-family: 'Monograph', sans-serif;
+    font-size: 17px;
+    line-height: 1.6; /* Improve readability */
+    margin-bottom: 5px;
+}
+
+/* .post {
     padding-bottom: 20px; 
     margin-bottom: 20px;
     overflow-y: auto;
@@ -106,11 +135,15 @@
     margin-right:20px;
     margin-top: 20px;
     margin-left:30px;
+    font-family: 'Monograph', sans-serif;
+    
+    
+    
 
 }
 
 .post h2 {
-    color:#3e2723; /* color of the title */
+    color:#3e2723; 
     border: 2px seagreen;
     background-color: seagreen;
     padding:10px;
@@ -118,14 +151,15 @@
     margin-left:30px;
 }
 
-/* Styling for the post content */
+
 .post p {
     border: 4px solid seagreen; 
-    padding: 20px; /* padding inside the border */
+    padding: 20px; 
     font-size: 18px;
+    font-family: 'Roboto', sans-serif;
     
 
-}
+} */
 
 /* Container for the entire contact page */
 .contact-page {
@@ -141,18 +175,23 @@
 
 .introduction h2 {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    margin-top:100px;
+    margin-left :60px;
 }
 
 .introduction p {
     font-size: 16px;
     line-height: 1.5;
+    margin-top:100px;
+    margin-left :60px;
 }
 
 /* Contact information section */
 .contact-info {
     border-top: 1px solid #ccc;
     padding-top: 20px;
+    margin-left :60px;
 }
 
 .contact-info h3 {

@@ -10,11 +10,11 @@
 }
 
 .form {
-    background-color: white;
+    /* background-color: white; */
     width: 400px;
     border-radius: 8px;
     padding: 20px 40px;
-    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
+    box-shadow: 0 15px 30px rgba(92, 99, 105, .2);
 }
 
 .title {
@@ -35,10 +35,10 @@
     left: 0px;
     height: 100%;
     width: 100%;
-    border: 1px solid #DADCE0;
-    border-radius: 7px;
+    border: 4px solid #DADCE0;
+    border-radius: 15px;
     font-size: 16px;
-    padding: 0 20px;
+    padding: 0 30px;
     outline: none;
     background: none;
     z-index: 1;
@@ -49,8 +49,7 @@
     top: 15px;
     left: 15px;
     padding: 0 4px;
-    background-color: white;
-    color: #DADCE0;
+    color: black;
     font-size: 16px;
     transition: 0.5s;
     z-index: 0;
@@ -75,7 +74,7 @@
     margin-left: auto;
     padding: 15px 30px;
     border: none;
-    background-color:mediumseagreen;
+    background-color: #98866f;
     color: white;
     border-radius: 6px;
     cursor: pointer;
@@ -84,28 +83,26 @@
 }
 
 .submitBtn:hover {
-    background-color: darkseagreen;
+    background-color: #b9a89e;
     transform: translateY(-2px);
 }
 
 .post-info {
     font-size: 20px;
     color: #3e2723;
-    margin-left: 20px;
+    margin-left: 30px;
 
     
 
 }
-/* stylink for each post and how it's displayed*/
 
 /* Apply Monograph font to the entire post */
 .post {
-    font-family: 'Monograph', sans-serif;
-    /* Other styles for the post */
+    font-family: 'Roboto', sans-serif;
     color: #333; /* Ensure text is readable against the background */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 18px rgba(0, 0, 0, 0.1);
     margin-bottom: 100px;
     margin-top: 100px;
     
@@ -113,53 +110,30 @@
 
 /* Style for post headings */
 .post h2 {
-    font-family: 'Monograph', sans-serif;
     font-size: 30px;
     color: #3e2723; /* Adjust color to complement the font */
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.post h2 a {
+    color: black; 
+    text-decoration: none; 
+}
+
+.post h2 a:hover {
+    color: #98866f;
+    text-decoration: underline; 
 }
 
 /* Style for post paragraphs */
 .post p {
-    font-family: 'Monograph', sans-serif;
-    font-size: 17px;
-    line-height: 1.6; /* Improve readability */
-    margin-bottom: 5px;
-}
-
-/* .post {
-    padding-bottom: 20px; 
-    margin-bottom: 20px;
-    overflow-y: auto;
-    padding-top: 90px;
-    margin-right:20px;
-    margin-top: 20px;
-    margin-left:30px;
-    font-family: 'Monograph', sans-serif;
     
-    
-    
-
-}
-
-.post h2 {
-    color:#3e2723; 
-    border: 2px seagreen;
-    background-color: seagreen;
-    padding:10px;
-    font-size: 30px;
-    margin-left:30px;
-}
-
-
-.post p {
-    border: 4px solid seagreen; 
-    padding: 20px; 
     font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-    
-
-} */
+    line-height: 1.6; 
+    margin-bottom: 10px;
+}
 
 /* Container for the entire contact page */
 .contact-page {
@@ -173,15 +147,9 @@
     margin-bottom: 20px;
 }
 
-.introduction h2 {
-    font-size: 24px;
-    margin-bottom: 30px;
-    margin-top:100px;
-    margin-left :60px;
-}
 
 .introduction p {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.5;
     margin-top:100px;
     margin-left :60px;
@@ -221,11 +189,15 @@
 /* Styling for the h2 tag */
 #profile-info h2 {
     font-size: 25px; 
+    margin: 0;
+    float: right;
 }
 
 /* Styling for the profile-info section */
 #profile-info {
     padding: 80px; 
+    display: grid; /* Use Grid layout */
+    justify-content: end;
 }
 
 #edit-post-form{
@@ -238,7 +210,8 @@
 #write-form {
     padding: 20px; 
     background-color: blanchedalmond;
-    margin-top:40px; 
+    margin-top:100px; 
+    margin-bottom:30px;
 
     
 }
@@ -271,7 +244,7 @@
 }
 
 #write-form button[type="submit"] {
-    background-color:mediumseagreen;
+    background-color: #98866f;
     color: white;
     padding: 10px 20px; 
     border: none; 
@@ -280,7 +253,7 @@
 }
 
 #write-form button[type="submit"]:hover {
-    background-color:darkseagreen;
+    background-color: #b9a89e;
 }
 
 .comments {
@@ -295,7 +268,7 @@
     overflow-y: auto;
     margin-top:10px;
     color:white; /* color of the title */
-    border: 2px seagreen;
+    border: 5px seagreen;
     background-color: seagreen;
 
 
@@ -358,21 +331,15 @@
     border: 1px solid darkseagreen;
 }
 .add-comment-form textarea::placeholder {
-    color: #999; /* Placeholder text color */
-    font-style: italic; /* Italic style for the placeholder text */
-    font-size: 16px; /* Font size for the placeholder text */
+    color: #999;
+    font-style: italic; 
+    font-size: 16px; 
 }
-
-/* Hide the post-id input field */
-/* #post-id {
-    display: none; 
-} */
 
 
 .add-comment-btn{
     padding: 10px 20px; 
     font-size: 16px;
-    background-color: seagreen;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -384,7 +351,6 @@ input[type="text"],
 textarea {
     padding: 20px;
     font-size: 16px;
-    border: darkseagreen;
     margin-bottom: 15px;
     width: 100%; 
 
@@ -398,12 +364,17 @@ textarea {
 button[type="submit"] {
     padding: 10px 20px; 
     font-size: 16px;
-    background-color: seagreen;
+    background-color: #98866f;
     color: #fff;
     border: none;
     cursor: pointer;
-    align-self:end; /* Align button to the end of the form */
+    align-self:end; 
     width: auto;
+}
+
+button[type="submit"]:hover {
+    background-color: #b9a89e; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .delete-post-btn {
@@ -414,6 +385,7 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     margin-left:15px;
+    font-style:oblique;
 
 }
 
@@ -429,6 +401,7 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     margin-left:3px;
+    font-style:oblique;
 }
 
 .edit-post-btn:hover {
@@ -450,6 +423,8 @@ button {
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+    border-radius: 5px;
+    font-style:oblique;
 }
 .delete-comment-btn:hover {
     background-color: darkred;
@@ -460,6 +435,15 @@ button {
 /* Delete button container */
 .comment-actions {
     display: flex;
-    justify-content: flex-end; /* Align the button to the right */
+    justify-content: flex-end;
 }
 
+/* Styling for the greeting */
+#greeting {
+    font-size: 36px; /* Larger font size for prominence */
+    font-style: italic; /* Italicize text for emphasis */
+    color: #3e2723; /* Dark color for contrast */
+    margin: 0; /* Remove default margin */
+    font-weight: bold; /* Make text bold */
+    line-height: 1.2; /* Adjust line height for readability */
+}

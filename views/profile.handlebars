@@ -1,10 +1,10 @@
 <!-- profile.handlebars -->
 <section id="profile-info">
-    <h2>Welcome, {{username}}</h2>
+    <h2 id="greeting">What’s Up, {{username}}!</h2> <!-- Ensure correct spelling of 'greeting' -->
 </section>
 
 <section id="user-posts">
-    <h3>My liked Posts</h3>
+    <h3>Favorite Posts</h3> 
     {{#if posts.length}}
         <div id="posts-container">
             {{#each posts}}

@@ -1,4 +1,5 @@
-// Routes to get all user details and post. 
+// Routes to get all user details and post.
+
 const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth')
@@ -70,20 +71,6 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// home page after signup *
-router.post('/', async (req, res) => {
-    try {
-        const dbUserData = await User.create(req.body);
-        req.session.save(() => {
-            req.session.user_id = dbUserData.id;
-            req.session.name = dbUserData.name;
-            req.session.logged_in = true;
-            res.redirect('/profile'); // Redirect to profile page after signup
-        });
-    } catch (err) {
-        res.status(400).json(err);
-    }
-});
 
 // this is a signup route to redirect to the profile once user signs up *
 router.post('/signup', async (req, res) => {

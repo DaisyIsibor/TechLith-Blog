@@ -1,8 +1,8 @@
 // commentRoutes.js
+
 const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
-// const sequelize = require('../../config/connection');
 
 // Get all comments* backend
 
@@ -34,8 +34,6 @@ try {
 });
 
 // Create a new comment* postman
-
-// Fetches comments by post ID
 
 router.post('/', withAuth, async (req, res) => {
     console.log('Session User ID:', req.session.user_id);
@@ -71,20 +69,20 @@ router.delete('/:id', withAuth, async (req, res) => {
         const commentData = await Comment.destroy({
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id, // Ensure only the comment owner can delete
+                user_id: req.session.user_id, // Ensures only the comment owner can delete
             },
         });
 
         // no comment found or not authorized
         if (!commentData) { 
             
-           
+        
         
             return res.status(404).json({ message: 'No comment found or you do not have permission to delete this comment' });
             
         }
 
-         
+        
         return res.status(200).json({message:'Comment deleted successfully'});
     } catch (err) {
 

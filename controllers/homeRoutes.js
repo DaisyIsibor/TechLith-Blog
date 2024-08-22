@@ -39,65 +39,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-//Render single post view  * DUPLICATE CODE MAYBE
-
-// router.get('/post/:id/comments', withAuth, async (req, res) => {
-//     try {
-//         const postData = await Post.findByPk(req.params.id, {
-//             include: [
-//                 {
-//                     model: User, // Include User model
-//                     attributes: ['username'], // Only include the username attribute
-//                 },
-//                 {
-//                     model: Comment, include: [User],
-//                 }
-//             ],
-//         });
-
-//         if (!postData) {
-//             res.status(404).json({ message: 'No post found with this id' });
-//             return;
-//         }
-
-//         const post = postData.get({ plain: true });
-
-//         // const isAuthor = post.user_id === req.session.user_id;
-
-//         // post.comments.forEach(comment => {
-//         //     comment.isAuthor = comment.user_id === req.session.user_id; 
-
-//         //     console.log('Comment Data:',comment)
-//         // });
-
-//         // res.render('singlepost', {
-//         //     post,
-//         //     comments: post.Comments,
-//         //     isAuthor,
-//         //     logged_in: req.session.logged_in
-//         // });
-//     } catch (err) {
-//         console.error(err);
-//         res.status(500).json(err);
-//     }
-// });
-
-
-// Retrieving all posts with associated comments // may not need 
-// router.get('/', async (req, res) => {
-//     try {
-//         const posts = await Post.findAll({
-//             include: [{ model: Comment }],
-//         });
-//         res.status(200).json(posts);
-//     } catch (err) {
-//         console.error('Error retrieving posts:', err);
-//         res.status(500).json({ error: 'Failed to retrieve posts' });
-//     }
-// });
-
 // Render single post view with comments
-// ***
 
 router.get('/post/:id/comments', withAuth, async (req, res) => {
     try {
@@ -146,9 +88,6 @@ router.get('/post/:id/comments', withAuth, async (req, res) => {
         res.status(500).json(err);
     }
 });
-
-
-
 
 
 

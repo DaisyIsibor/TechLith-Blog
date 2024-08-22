@@ -50,13 +50,6 @@ router.get('/users/:id', withAuth, async (req, res) => {
     }
 });
 
-//         res.json(userData); // Return JSON data
-//     } catch (error) {
-//         console.error('Error fetching user data:', error);
-//         res.status(500).json({ error: 'Failed to fetch user data' });
-//     }
-// });
-
 
 // GET the page for creating a new post
 router.get('/:userId/newpost', (req, res) => {

@@ -7,6 +7,7 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
+    
 }
 
 .form {
@@ -223,7 +224,7 @@
 
 #write-form h2 {
     font-size: 24px; 
-    margin-bottom: 20px; 
+    margin-bottom: 80px; 
 }
 
 #write-form label {
@@ -258,7 +259,7 @@
 
 .comments {
     padding-top: 10px;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .comment {
@@ -278,16 +279,17 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 40px;
-    margin-bottom:20px;
+    margin-bottom:10px;
     
 }
 
 .comment p {
-    margin: 5px 0;
+    margin: 4px 0;
+    margin-top:70px;
 }
 
 .comments h3{
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     font-size: 50px;
     font-weight: bold;
     font-family: italic;

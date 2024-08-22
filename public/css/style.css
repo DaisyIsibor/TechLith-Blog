@@ -8,7 +8,7 @@
 @font-face {
     font-family: 'more_than_humanregular'; /* Font name */
     src: url('../images/morethanhuman-webfont.woff2') format('woff2'),
-         url('../images/morethanhuman-webfont.woff') format('woff');
+    url('../images/morethanhuman-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,6 +23,7 @@
     justify-content: center;
     align-items: center;
     font-family: 'Roboto', sans-serif;
+
 }
 .form {
     background-color: blanchedalmond;
@@ -46,7 +47,7 @@
     position: relative;
     margin-bottom: 20px;
     height: 45px;
-    width: 90%;
+    width: 100%;
 }
 
 .input {
@@ -90,6 +91,18 @@
     color: transparent;
 }
 
+.password-input::placeholder {
+    color: #aaa; 
+    content: "Password (min 8 characters)"; 
+    text-indent: 80px; 
+    padding-right: 30px;
+}
+
+.password-input {
+    padding-right: 20px; /* Increase right padding to make room for the placeholder text */
+}
+
+
 .submitBtn {
     display: block;
     margin-left: 70%;
@@ -114,10 +127,6 @@
     font-size: 30px; 
     padding: 7px; 
     margin-right: 10px; 
-    
-    
-    
-
 }
 
 #menu {
@@ -170,7 +179,6 @@
     #menu li {
         margin: 0;
         padding: 0;
-        
     }
     
     #menu a {
@@ -222,9 +230,6 @@
         z-index: 1000;
         font-size:18px;
         font-family: 'Roboto', sans-serif;
-       
-        
-        
     }
 
     .header-title {
@@ -239,9 +244,9 @@
         text-decoration: none; /* Remove underline */
     }
     
-    /* Optional: Add hover effect for the link */
+    
     .header-link:hover {
-        color: white; /* Change color on hover if desired */
+        color: white; 
     }
 
     
@@ -252,8 +257,6 @@
         align-items: center;
         font-style: italic;
         color: #3e2723;
-        
-    
     }
 
     #login
@@ -267,7 +270,6 @@
         height: 1000px;
         font-family: 'Roboto', sans-serif;
         color: #333;
-        
     }
     
     @media only screen and (max-width:768px) {
@@ -320,8 +322,6 @@
         color: #333; 
         margin-top:1px;
         margin-left: -5px;
-    
-        
     }
     
     /* Like/Unlike Button */
@@ -332,14 +332,13 @@
         padding: 0; 
         margin-right: 10px; 
         align-items: center;
-        
     }
     
     /* Like Icon */
     .like-icon {
         width: 50px; 
         height: 35px; 
-        transition: filter 0.3s ease; /* Smooth transition for filter changes */
+        transition: filter 0.2s ease; /* Smooth transition for filter changes */
         margin-top:5px;
     }
     
@@ -352,8 +351,7 @@
         filter: brightness(20); /* Slight darkening on hover */
     }
 
-   /* for favoutite post h3*/
-
+/* for favoutite post h3*/
     #user-posts {
         margin-top: 50px; 
         margin-bottom: 0; 
@@ -368,16 +366,11 @@
     font-style:italic;
     color: #3e2723;
 }
-    
-
-
     .comments-section {
         margin-top: 10px;
         padding-top: 10px;
         border-top: 1px solid #ddd;
     }
-    
-    
 
 
 

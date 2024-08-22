@@ -1,5 +1,4 @@
-
-# AwesomeBlogMVC
+# TechlITH
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-purple.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
@@ -105,12 +104,6 @@ http://localhost:3001/api/comments
 ## Tests
 To run tests for the Tech-Blog application, execute the following command:
 npm start
-
-![alt text](public/images/homepage.png)
-![alt text](public/images/post-commentform.png)
-![alt text](<public/images/profile page.png>)
-![alt text](public/images/new-post-page.png)
-![alt text](public/images/singlepost.png)
 
 
 

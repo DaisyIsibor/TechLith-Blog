@@ -1,33 +1,22 @@
 <div class="comment">
     <div class="comment-content">
-        <p><strong>Commented by:</strong> {{this.user.username}}</p>
-        <p><strong>Commented on:</strong> {{formatDate this.createdAt}}</p>
+        
         <p>{{this.comment_text}}</p>
+
+        <span class="comment-header">{{this.user.username}} ➔ {{formatDate this.createdAt}} </span>
     </div>
 
- {{#if this.isAuthor}}
+{{#if this.isAuthor}}
         <div class="comment-actions">
             <button class="delete-comment-btn" data-id="{{this.id}}">DELETE</button>
         </div>
     {{else}}
-        {{!-- <div class="comment-actions">
-            <p>No delete button available. (isAuthor: {{this.isAuthor}})</p>
-        </div> --}}
+    
     {{/if}}
 </div>
 
 
-    {{!-- {{#if this.isAuthor}}
-        <div class="comment-actions">
-            <button class="delete-comment-btn" data-id="{{this.id}}">DELETE</button>
-        </div>
-    {{else}}
-        <div class="comment-actions">
-            <p>Delete button not shown for this comment.</p>
-        </div>
-    {{/if}}
-</div> --}}
-
+    
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

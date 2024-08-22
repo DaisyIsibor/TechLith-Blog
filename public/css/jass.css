@@ -257,7 +257,7 @@
 }
 
 .comments {
-    padding-top: 7px;
+    padding-top: 10px;
     margin-top: 30px;
 }
 
@@ -267,11 +267,19 @@
     margin-bottom: 20px;
     overflow-y: auto;
     margin-top:10px;
-    color:white; /* color of the title */
-    border: 5px seagreen;
-    background-color: seagreen;
+    color:black; /* color of the title */
+    border-bottom: 3px solid #98866f;
 
 
+
+}
+
+.comment-header{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    margin-bottom:20px;
+    
 }
 
 .comment p {
@@ -286,12 +294,6 @@
     font-style:italic;
 }
 
-
-.comment p strong {
-    display: inline-block;
-    width: 150px;
-    margin-bottom: 10px;
-}
 
 .add-comment-form {
     margin-top: 20px;
@@ -349,9 +351,9 @@
 
 input[type="text"],
 textarea {
-    padding: 20px;
+    padding: 30px;
     font-size: 16px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     width: 100%; 
 
 }
@@ -440,10 +442,10 @@ button {
 
 /* Styling for the greeting */
 #greeting {
-    font-size: 36px; /* Larger font size for prominence */
-    font-style: italic; /* Italicize text for emphasis */
-    color: #3e2723; /* Dark color for contrast */
-    margin: 0; /* Remove default margin */
-    font-weight: bold; /* Make text bold */
+    font-size: 36px; 
+    font-style: italic; 
+    color: #3e2723;
+    margin: 0; 
+    font-weight: bold; 
     line-height: 1.2; /* Adjust line height for readability */
 }

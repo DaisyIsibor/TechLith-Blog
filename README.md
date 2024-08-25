@@ -135,7 +135,7 @@ npm start
 
 - **GitHub**: [daisy isibor](https://github.com/daisy isibor)
 - **Email**: daisyisibor9@gmail.com
-
+- **LinkedIn**: [daisy isibor] https://www.linkedin.com/in/daisy-isibor-fsd
 
 ## License
 This project is licensed under the [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-purple.svg)](https://www.gnu.org/licenses/gpl-3.0)

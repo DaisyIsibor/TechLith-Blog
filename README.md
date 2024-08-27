@@ -130,7 +130,7 @@ heroku run npm run seed
 ![alt text](public/images/Login-page.png)
 ![alt text](public/images/Sign-up.png)
 ![alt text](public/images/Menu.png)
-![alt text](public/images/HomePage.png)
+![alt text](public/images/homepage.png)
 ![alt text](public/images/Profile-Page.png)
 ![alt text](public/images/New-post.png)
 ![alt text](public/images/Comment-Page.png)

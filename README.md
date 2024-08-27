@@ -122,6 +122,9 @@ http://localhost:3001/api/comments
 To run tests for the Tech-Blog application, execute the following command:
 npm start
 
+To make sure heroku has all seeded information, execute the below command
+heroku run npm run seed
+
 ![alt text](public/images/Login-page.png)
 ![alt text](public/images/Sign-up.png)
 ![alt text](public/images/HomePage.png)

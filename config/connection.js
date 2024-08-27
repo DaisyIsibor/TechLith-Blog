@@ -1,5 +1,3 @@
-// Import Sequelize module
-
 const Sequelize = require('sequelize');
 require('dotenv').config();
 

@@ -1,4 +1,3 @@
-// All connections to the PORT 3001 and all requires
 require('dotenv').config(); // Load environment variables from .env file
 const path = require('path');
 const express = require('express');
@@ -42,7 +41,7 @@ app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
 app.listen(PORT, () => console.log(`Now listening on port http://localhost:${PORT}`));
-// app.listen(PORT, () => console.log('Now listening'));
+
 });
 
 // Log database credentials

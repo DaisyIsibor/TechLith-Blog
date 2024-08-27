@@ -1,5 +1,7 @@
 # TechLITH
 
+## Deployed site : https://techlith-4cd8f6ed0198.herokuapp.com/
+
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-purple.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 
@@ -127,8 +129,8 @@ heroku run npm run seed
 
 ![alt text](public/images/Login-page.png)
 ![alt text](public/images/Sign-up.png)
-![alt text](public/images/HomePage.png)
 ![alt text](public/images/Menu.png)
+![alt text](public/images/HomePage.png)
 ![alt text](public/images/Profile-Page.png)
 ![alt text](public/images/New-post.png)
 ![alt text](public/images/Comment-Page.png)
